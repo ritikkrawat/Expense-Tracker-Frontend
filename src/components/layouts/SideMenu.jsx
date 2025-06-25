@@ -9,17 +9,17 @@ const SideMenu = ({ activeMenu }) => {
   const navigate = useNavigate();
 
   const handleClick = (path) => {
-    if (path.includes('logout')) {
+    if (path === 'logout') {
       handleLogout();
     } else {
       navigate(path);
     }
   };
 
-    const handleLogout = () => {
+  const handleLogout = () => {
     localStorage.removeItem('token'); // Clear JWT token
     clearUser();                      // Clear user context
-    window.location.href = '/login'; // ⬅️ Force full reload to clean up everything
+    navigate('/login');              // Redirect to login page
   };
 
   return (
