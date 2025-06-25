@@ -9,7 +9,8 @@ const SideMenu = ({ activeMenu }) => {
   const navigate = useNavigate();
 
   const handleClick = (path) => {
-    if (path === 'logout') {
+    // Match logout with or without slash/hash
+    if (path === 'logout' || path === '/logout' || path === '/#logout') {
       handleLogout();
     } else {
       navigate(path);
@@ -17,9 +18,9 @@ const SideMenu = ({ activeMenu }) => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token'); // Clear JWT token
-    clearUser();                      // Clear user context
-    navigate('/login');              // Redirect to login page
+    localStorage.removeItem('token');  // Clear JWT token
+    clearUser();                       // Clear user context
+    navigate('/login');                // Redirect to login page
   };
 
   return (
