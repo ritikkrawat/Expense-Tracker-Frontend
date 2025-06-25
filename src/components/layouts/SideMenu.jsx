@@ -16,10 +16,10 @@ const SideMenu = ({ activeMenu }) => {
     }
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');  // Clear JWT token
-    clearUser();                       // Clear user context
-    navigate('/login');                // Redirect to login page
+    const handleLogout = () => {
+    localStorage.removeItem('token'); // Clear JWT token
+    clearUser();                      // Clear user context
+    window.location.href = '/login'; // ⬅️ Force full reload to clean up everything
   };
 
   return (
