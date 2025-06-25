@@ -9,8 +9,7 @@ const SideMenu = ({ activeMenu }) => {
   const navigate = useNavigate();
 
   const handleClick = (path) => {
-    // Match logout with or without slash/hash
-    if (path === 'logout' || path === '/logout' || path === '/#logout') {
+    if (path.includes('logout')) {
       handleLogout();
     } else {
       navigate(path);
