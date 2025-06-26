@@ -77,15 +77,14 @@ const Expense = () => {
   };
 
   // Edit expense
-  const handleEditExpense = async (updatedExpense) => {
+  const handleEditExpense = async ({ _id, category, amount, date, icon }) => {
     try {
-      await axiosInstance.put(
-        API_PATHS.EXPENSE.UPDATE_EXPENSE(updatedExpense._id),
-        {
-          category: updatedExpense.category,
-          amount: updatedExpense.amount,
-        }
-      );
+      await axiosInstance.put(API_PATHS.EXPENSE.UPDATE_EXPENSE(_id), {
+        category,
+        amount,
+        date,
+        icon,
+      });
       toast.success('Expense updated successfully');
       fetchExpenseDetails();
     } catch (error) {

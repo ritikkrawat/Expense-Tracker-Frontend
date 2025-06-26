@@ -83,6 +83,28 @@ const ExpenseList = ({ transactions, onDelete, onDownload, onEditExpense }) => {
               />
             </div>
 
+            <div>
+              <label className="text-sm font-medium text-gray-700">Date</label>
+              <input
+                type="date"
+                name="date"
+                defaultValue={moment(selectedExpense.date).format('YYYY-MM-DD')}
+                required
+                className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
+          
+            <div>
+              <label className="text-sm font-medium text-gray-700">Icon</label>
+              <input
+                type="text"
+                name="icon"
+                defaultValue={selectedExpense.icon}
+                required
+                className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
+
             <div className="flex justify-end gap-2">
               <button
                 type="button"
