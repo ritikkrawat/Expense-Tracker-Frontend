@@ -3,23 +3,20 @@ import { LuDownload } from 'react-icons/lu';
 import TransactionInfoCard from '../Cards/TransactionInfoCard';
 import moment from 'moment';
 import Modal from '../Modal';
-import EmojiPickerPopup from '../EmojiPickerPopup';
+import EmojiPickerPopup from '../EmojiPickerPopup'; // Make sure path is correct
 
 const ExpenseList = ({ transactions, onDelete, onDownload, onEditExpense }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedExpense, setSelectedExpense] = useState(null);
-  const [emoji, setEmoji] = useState('');
 
   const handleEditClick = (expense) => {
-    setSelectedExpense(expense);
-    setEmoji(expense.icon || '');
+    setSelectedExpense({ ...expense }); // clone to avoid direct mutation
     setIsModalOpen(true);
   };
 
   const handleModalClose = () => {
     setIsModalOpen(false);
     setSelectedExpense(null);
-    setEmoji('');
   };
 
   const handleFormSubmit = (e) => {
@@ -29,7 +26,6 @@ const ExpenseList = ({ transactions, onDelete, onDownload, onEditExpense }) => {
       category: e.target.category.value,
       amount: parseFloat(e.target.amount.value),
       date: e.target.date.value,
-      icon: emoji,
     };
     onEditExpense(updated);
     handleModalClose();
@@ -100,9 +96,13 @@ const ExpenseList = ({ transactions, onDelete, onDownload, onEditExpense }) => {
               />
             </div>
 
+            {/* ✅ Emoji Picker */}
             <div>
               <label className="text-sm font-medium text-gray-700">Icon</label>
-              <EmojiPickerPopup icon={emoji} onSelect={setEmoji} />
+              <EmojiPickerPopup
+                icon={selectedExpense.icon}
+                onSelect={(emoji) => setSelectedExpense((prev) => ({ ...prev, icon: emoji }))}
+              />
             </div>
 
             <div className="flex justify-end gap-2">
