@@ -3,7 +3,7 @@ import { LuDownload } from 'react-icons/lu';
 import TransactionInfoCard from '../Cards/TransactionInfoCard';
 import moment from 'moment';
 import Modal from '../Modal';
-import EmojiPickerPopup from '../EmojiPickerPopup'; // Make sure path is correct
+import EmojiPickerPopup from '../EmojiPickerPopup'; 
 
 const ExpenseList = ({ transactions, onDelete, onDownload, onEditExpense }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
