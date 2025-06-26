@@ -3,19 +3,23 @@ import { LuDownload } from 'react-icons/lu';
 import TransactionInfoCard from '../Cards/TransactionInfoCard';
 import moment from 'moment';
 import Modal from '../Modal';
+import EmojiPickerPopup from '../EmojiPickerPopup';
 
 const ExpenseList = ({ transactions, onDelete, onDownload, onEditExpense }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedExpense, setSelectedExpense] = useState(null);
+  const [emoji, setEmoji] = useState('');
 
   const handleEditClick = (expense) => {
     setSelectedExpense(expense);
+    setEmoji(expense.icon || '');
     setIsModalOpen(true);
   };
 
   const handleModalClose = () => {
     setIsModalOpen(false);
     setSelectedExpense(null);
+    setEmoji('');
   };
 
   const handleFormSubmit = (e) => {
@@ -24,6 +28,8 @@ const ExpenseList = ({ transactions, onDelete, onDownload, onEditExpense }) => {
       ...selectedExpense,
       category: e.target.category.value,
       amount: parseFloat(e.target.amount.value),
+      date: e.target.date.value,
+      icon: emoji,
     };
     onEditExpense(updated);
     handleModalClose();
@@ -93,16 +99,10 @@ const ExpenseList = ({ transactions, onDelete, onDownload, onEditExpense }) => {
                 className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
-          
+
             <div>
               <label className="text-sm font-medium text-gray-700">Icon</label>
-              <input
-                type="text"
-                name="icon"
-                defaultValue={selectedExpense.icon}
-                required
-                className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-              />
+              <EmojiPickerPopup icon={emoji} onSelect={setEmoji} />
             </div>
 
             <div className="flex justify-end gap-2">
