@@ -3,7 +3,6 @@ import { LuDownload } from 'react-icons/lu'
 import TransactionInfoCard from '../Cards/TransactionInfoCard'
 import moment from 'moment' 
 import Modal from '../Modal'
-import {API_PATHS} from '../../utils/apiPaths'
 
 const ExpenseList = ({ transactions, onDelete, onDownload, onEditExpense }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -25,7 +24,6 @@ const ExpenseList = ({ transactions, onDelete, onDownload, onEditExpense }) => {
       ...selectedExpense,
       category: e.target.category.value,
       amount: parseFloat(e.target.amount.value),
-      date: e.target.date.value,
     }
     onEditExpense(updated)
     handleModalClose()
@@ -62,55 +60,43 @@ const ExpenseList = ({ transactions, onDelete, onDownload, onEditExpense }) => {
         {selectedExpense && (
           <form onSubmit={handleFormSubmit} className='space-y-4'>
             <div>
-                <label className='text-sm font-medium text-gray-700'>Category</label>
-                <input
-                  type='text'
-                  name='category'
-                  defaultValue={selectedExpense.category}
-                  required
-                  className='mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500'
-                />
+              <label className='text-sm font-medium text-gray-700'>Category</label>
+              <input
+                type='text'
+                name='category'
+                defaultValue={selectedExpense.category}
+                required
+                className='mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500'
+              />
             </div>
 
             <div>
-                <label className='text-sm font-medium text-gray-700'>Amount</label>
-                <input
-                  type='number'
-                  name='amount'
-                  defaultValue={selectedExpense.amount}
-                  required
-                  min='1'
-                  step='0.01'
-                  className='mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500'
-                />
+              <label className='text-sm font-medium text-gray-700'>Amount</label>
+              <input
+                type='number'
+                name='amount'
+                defaultValue={selectedExpense.amount}
+                required
+                min='1'
+                step='0.01'
+                className='mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500'
+              />
             </div>
-
-            <div>
-                <label className='text-sm font-medium text-gray-700'>Date</label>
-                <input
-                  type='date'
-                  name='date'
-                  defaultValue={moment(selectedExpense.date).format('YYYY-MM-DD')}
-                  required
-                  className='mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500'
-                />
-            </div>
-
 
             <div className='flex justify-end gap-2'>
-                <button
-                  type='button'
-                  onClick={handleModalClose}
-                  className='px-4 py-2 text-sm text-gray-500 bg-gray-100 rounded hover:bg-gray-200'
-                >
-                  Cancel
-                </button>
-                <button
-                  type='submit'
-                  className='px-4 py-2 text-sm text-white bg-blue-600 rounded hover:bg-blue-700'
-                >
-                  Save Changes
-                </button>
+              <button
+                type='button'
+                onClick={handleModalClose}
+                className='px-4 py-2 text-sm text-gray-500 bg-gray-100 rounded hover:bg-gray-200'
+              >
+                Cancel
+              </button>
+              <button
+                type='submit'
+                className='px-4 py-2 text-sm text-white bg-blue-600 rounded hover:bg-blue-700'
+              >
+                Save Changes
+              </button>
             </div>
           </form>
         )}
