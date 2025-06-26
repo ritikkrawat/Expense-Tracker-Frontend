@@ -6,26 +6,25 @@ const EmojiPickerPopup = ({ icon, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className='flex flex-col md:flex-row items-start gap-5 mb-6'>
+    <div className="flex flex-col md:flex-row items-start gap-5 mb-6">
       <div
-        className='flex items-center gap-4 cursor-pointer'
+        className="flex items-center gap-4 cursor-pointer"
         onClick={() => setIsOpen(true)}
       >
-        <div className='w-12 h-12 flex items-center justify-center text-2xl bg-purple-50 text-primary rounded-lg'>
+        <div className="w-12 h-12 flex items-center justify-center text-2xl bg-purple-50 text-primary rounded-lg">
           {icon ? (
-            <span className='text-2xl'>{icon}</span>
+            <span className="text-2xl">{icon}</span> // Show native emoji
           ) : (
             <LuImage />
           )}
         </div>
-
         <p>{icon ? 'Change Icon' : 'Pick Icon'}</p>
       </div>
 
       {isOpen && (
-        <div className='relative z-20'>
+        <div className="relative">
           <button
-            className='w-7 h-7 flex items-center justify-center bg-white border border-gray-200 rounded-full absolute -top-2 -right-2 z-30 cursor-pointer'
+            className="w-7 h-7 flex items-center justify-center bg-white border border-gray-200 rounded-full absolute -top-2 -right-2 z-10 cursor-pointer"
             onClick={() => setIsOpen(false)}
           >
             <LuX />
@@ -33,9 +32,9 @@ const EmojiPickerPopup = ({ icon, onSelect }) => {
 
           <EmojiPicker
             open={isOpen}
-            onEmojiClick={(emojiData) => {
-              onSelect(emojiData.emoji);
-              setIsOpen(false);
+            onEmojiClick={(emoji) => {
+              onSelect(emoji?.emoji || ''); // ✅ Use native emoji
+              setIsOpen(false); // Close dropdown after selection
             }}
           />
         </div>
