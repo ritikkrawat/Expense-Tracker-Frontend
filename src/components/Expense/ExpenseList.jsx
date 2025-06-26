@@ -24,6 +24,7 @@ const ExpenseList = ({transactions, onDelete, onDownload}) => {
                     amount={expense.amount}
                     type='expense'
                     onDelete={() => onDelete(expense._id)}
+                    onEdit={() => onEdit(expense)}
                 />
             ))}
         </div>
