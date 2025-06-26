@@ -13,7 +13,7 @@ const IncomeOverview = ({transactions, onAddIncome}) => {
     return () => {}
   }, [transactions])
   return (
-    <div className='card'>
+    <div className='card transition-all duration-200 hover:shadow-xl hover:scale-[1.01] hover:border hover:border-blue-100 hover:bg-blue-50/20'>
       <div className='flex items-center justify-between'>
         <div className=''>
           <h5 className='text-lg'>Income Overview</h5>
