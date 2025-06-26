@@ -106,7 +106,7 @@ const Expense = () => {
         {
           responseType: 'blob',
         }
-      )e
+      )
 
       // Create a URL for the blob
       const url = window.URL.createObjectURL(new Blob([response.data]));
