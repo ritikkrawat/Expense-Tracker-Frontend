@@ -12,10 +12,10 @@ const EmojiPickerPopup = ({ icon, onSelect }) => {
         onClick={() => setIsOpen(true)}
       >
         <div className="w-12 h-12 flex items-center justify-center text-2xl bg-purple-50 text-primary rounded-lg">
-          {icon ? (
-            <span className="text-2xl">{icon}</span> // Show native emoji
+          {icon?.startsWith('http') ? (
+            <img src={icon} alt="emoji" className="w-6 h-6" /> 
           ) : (
-            <LuImage />
+            <span className="text-xl">{icon}</span>
           )}
         </div>
         <p>{icon ? 'Change Icon' : 'Pick Icon'}</p>
