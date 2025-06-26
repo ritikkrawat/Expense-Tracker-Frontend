@@ -33,8 +33,9 @@ const EmojiPickerPopup = ({ icon, onSelect }) => {
           <EmojiPicker
             open={isOpen}
             onEmojiClick={(emoji) => {
-              onSelect(emoji?.emoji || ''); // ✅ Use native emoji
-              setIsOpen(false); // Close dropdown after selection
+                console.log(emoji)
+                onSelect(emoji?.emoji || ''); // ✅ Use native emoji
+                setIsOpen(false); // Close dropdown after selection
             }}
           />
         </div>
