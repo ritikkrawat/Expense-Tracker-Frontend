@@ -31,4 +31,4 @@ const IncomeList = ({transactions, onDelete, onDownload}) => {
   )
 }
 
-export default IncomeListe
+export default IncomeList
