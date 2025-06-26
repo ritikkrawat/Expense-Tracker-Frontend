@@ -24,6 +24,7 @@ const ExpenseList = ({ transactions, onDelete, onDownload, onEditExpense }) => {
       ...selectedExpense,
       category: e.target.category.value,
       amount: parseFloat(e.target.amount.value),
+      date: e.target.date.value,
     }
     onEditExpense(updated)
     handleModalClose()
