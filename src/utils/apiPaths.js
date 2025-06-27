@@ -27,4 +27,8 @@ export const API_PATHS = {
     IMAGE: {
         UPLOAD_IMAGE: "/api/v1/auth/upload-image",
     },
+    EMAIL: {
+        SEND_OTP: "/api/v1/email/send",
+        VERIFY_OTP: "/api/v1/email/verify",
+  },
 };
