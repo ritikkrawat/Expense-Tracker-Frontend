@@ -40,7 +40,9 @@ axiosInstance.interceptors.response.use(
             }
         } else if (error.code === 'ECONNABORTED') {
             console.error('Request timeout. Please try again.');
-        } 
+        } else if (error.response && error.response.status === 403) {
+            console.warn("Access denied.");
+        }
         return Promise.reject(error);
     }
 );
