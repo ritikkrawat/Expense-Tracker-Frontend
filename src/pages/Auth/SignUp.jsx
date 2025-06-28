@@ -11,11 +11,10 @@ import uploadImage from '../../utils/uploadImage';
 import toast from 'react-hot-toast';
 
 const Signup = () => {
-  const [profilePic, setProfilePic] = useState("");
-  const [fullName, setFullname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
+  const [profilePic, setProfilePic] = useState('');
+  const [fullName, setFullname] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [otp, setOtp] = useState('');
   const [otpSent, setOtpSent] = useState(false);
   const [isEmailVerified, setIsEmailVerified] = useState(false);
@@ -26,7 +25,7 @@ const Signup = () => {
 
   const handleSendOTP = async () => {
     if (!validateEmail(email)) {
-      toast.error("Enter a valid email before sending OTP");
+      toast.error('Enter a valid email before sending OTP');
       return;
     }
 
@@ -34,9 +33,9 @@ const Signup = () => {
     try {
       await axiosInstance.post(API_PATHS.EMAIL.SEND_OTP, { email });
       setOtpSent(true);
-      toast.success("OTP sent to your email ✅");
+      toast.success('OTP sent to your email ✅');
     } catch (err) {
-      toast.error("Failed to send OTP");
+      toast.error('Failed to send OTP');
     } finally {
       setOtpLoading(false);
     }
@@ -47,9 +46,9 @@ const Signup = () => {
     try {
       await axiosInstance.post(API_PATHS.EMAIL.VERIFY_OTP, { email, otp });
       setIsEmailVerified(true);
-      toast.success("Email verified successfully ✅");
+      toast.success('Email verified successfully ✅');
     } catch (err) {
-      toast.error("Invalid or expired OTP");
+      toast.error('Invalid or expired OTP');
     } finally {
       setOtpLoading(false);
     }
@@ -58,17 +57,17 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    if (!fullName) return toast.error("Please enter your name");
-    if (!validateEmail(email)) return toast.error("Invalid email address");
-    if (!password) return toast.error("Please enter the password");
-    if (!isEmailVerified) return toast.error("Please verify your email");
+    if (!fullName) return toast.error('Please enter your name');
+    if (!validateEmail(email)) return toast.error('Invalid email address');
+    if (!password) return toast.error('Please enter the password');
+    if (!isEmailVerified) return toast.error('Please verify your email');
 
     try {
-      let profileImageUrl = "";
+      let profileImageUrl = '';
 
       if (profilePic) {
         const imageUploadRes = await uploadImage(profilePic);
-        profileImageUrl = imageUploadRes.imageUrl || "";
+        profileImageUrl = imageUploadRes.imageUrl || '';
       }
 
       const res = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
@@ -81,14 +80,14 @@ const Signup = () => {
       const { token, user } = res.data;
 
       if (token) {
-        localStorage.setItem("token", token);
+        localStorage.setItem('token', token);
         updateUser(user);
-        toast.success("Signup successful! 🎉");
-        navigate("/dashboard");
+        toast.success('Signup successful! 🎉');
+        navigate('/dashboard');
       }
     } catch (err) {
       toast.error(
-        err.response?.data?.message || "Something went wrong. Try again."
+        err.response?.data?.message || 'Something went wrong. Try again.'
       );
     }
   };
@@ -113,13 +112,28 @@ const Signup = () => {
               type="text"
             />
 
-            <Input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              label="Email Address"
-              placeholder="example@gmail.com"
-              type="text"
-            />
+            <div className="w-full">
+              <Input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                label="Email Address"
+                placeholder="example@gmail.com"
+                type="text"
+              />
+            </div>
+
+            <div className="flex md:items-end md:ml-2">
+              {!otpSent && (
+                <button
+                  type="button"
+                  onClick={handleSendOTP}
+                  className="btn-primary h-[44px] px-4 w-full md:w-fit mt-2 md:mt-0"
+                  disabled={otpLoading}
+                >
+                  {otpLoading ? 'Sending...' : 'Send OTP'}
+                </button>
+              )}
+            </div>
 
             <div className="col-span-2">
               <Input
@@ -152,19 +166,8 @@ const Signup = () => {
             </div>
           )}
 
-          {!otpSent && (
-            <button
-              type="button"
-              onClick={handleSendOTP}
-              className="btn-primary mt-4"
-              disabled={otpLoading}
-            >
-              {otpLoading ? 'Sending OTP...' : 'Send OTP'}
-            </button>
-          )}
-
           {isEmailVerified && (
-            <p className="text-green-600 text-xs my-1">Email verified ✅</p>
+            <p className="text-green-600 text-xs my-2">Email verified ✅</p>
           )}
 
           <button type="submit" className="btn-primary mt-4">
@@ -173,10 +176,7 @@ const Signup = () => {
 
           <p className="text-[13px] text-slate-800 mt-3">
             Already have an account?{' '}
-            <Link
-              className="font-medium text-primary underline"
-              to="/login"
-            >
+            <Link className="font-medium text-primary underline" to="/login">
               Login
             </Link>
           </p>
