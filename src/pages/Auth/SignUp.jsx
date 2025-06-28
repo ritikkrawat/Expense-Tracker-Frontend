@@ -134,19 +134,9 @@ const Signup = () => {
                 </button>
               )}
             </div>
-
-            <div className="col-span-2">
-              <Input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                label="Password"
-                placeholder="Min 8 characters"
-                type="password"
-              />
-            </div>
           </div>
 
-          {/* OTP Section */}
+          {/* OTP Section: Moved above password */}
           {otpSent && !isEmailVerified && (
             <div className="my-4">
               <Input
@@ -169,6 +159,17 @@ const Signup = () => {
           {isEmailVerified && (
             <p className="text-green-600 text-xs my-2">Email verified ✅</p>
           )}
+
+          {/* Password comes below OTP */}
+          <div className="mt-2">
+            <Input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              label="Password"
+              placeholder="Min 8 characters"
+              type="password"
+            />
+          </div>
 
           <button type="submit" className="btn-primary mt-4">
             SIGN UP
