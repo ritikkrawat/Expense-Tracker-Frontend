@@ -136,7 +136,6 @@ const Signup = () => {
             </div>
           </div>
 
-          {/* OTP Section: Moved above password */}
           {otpSent && !isEmailVerified && (
             <div className="my-4">
               <Input
@@ -157,7 +156,7 @@ const Signup = () => {
           )}
 
           {isEmailVerified && (
-            <p className="text-green-600 text-xs my-2">Email verified ✅</p>
+            <p className="text-green-600 text-xs my-2">Email verified </p>
           )}
 
           {/* Password comes below OTP */}

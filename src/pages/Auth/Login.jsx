@@ -6,6 +6,7 @@ import {validateEmail} from '../../utils/helper';
 import axiosInstance from '../../utils/axiosinstance';
 import { API_PATHS } from '../../utils/apiPaths';
 import { UserContext } from '../../context/userContext';
+import toast from 'react-hot-toast';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -21,16 +22,14 @@ const Login = () => {
     e.preventDefault();
 
     if(!validateEmail(email)) {
-      setError('Please enter a valid email address.');
+      toast.error('Please enter a valid email address.');
       return;
     }
 
     if(!password) {
-      setError('Please enter the password');
+      toast.error('Please enter the password');
       return;
     }
-
-    setError("");
 
     // Login API Call
     try {
@@ -43,14 +42,15 @@ const Login = () => {
       if (token) {
         localStorage.setItem("token", token);
         updateUser(user);
+        toast.success('Login successful!');
         navigate("/dashboard");
       } 
     } catch (error) {
       console.log(error);
       if (error.response && error.response.data.message) {
-        setError(error.response.data.message);
+        toast.error(error.response.data.message);
       } else {
-        setError("Something went wrong. Please try again.");
+        toast.error("Something went wrong. Please try again.");
       }
     }
   };
