@@ -70,4 +70,3 @@ const EmailVerification = ({ onVerified }) => {
 };
 
 export default EmailVerification;
-s

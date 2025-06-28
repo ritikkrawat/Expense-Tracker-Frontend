@@ -33,8 +33,8 @@ const Signup = () => {
     try {
       await axiosInstance.post(API_PATHS.EMAIL.SEND_OTP, { email });
       setOtpSent(true);
-      toast.success('OTP sent to your email ✅');
-    } catch (err) {
+      toast.success('OTP sent to your email');
+    } catch {
       toast.error('Failed to send OTP');
     } finally {
       setOtpLoading(false);
@@ -46,8 +46,8 @@ const Signup = () => {
     try {
       await axiosInstance.post(API_PATHS.EMAIL.VERIFY_OTP, { email, otp });
       setIsEmailVerified(true);
-      toast.success('Email verified successfully ✅');
-    } catch (err) {
+      toast.success('Email verified successfully');
+    } catch {
       toast.error('Invalid or expired OTP');
     } finally {
       setOtpLoading(false);
@@ -156,10 +156,9 @@ const Signup = () => {
           )}
 
           {isEmailVerified && (
-            <p className="text-green-600 text-xs my-2">Email verified </p>
+            <p className="text-green-600 text-xs my-2">Email verified</p>
           )}
 
-          {/* Password comes below OTP */}
           <div className="mt-2">
             <Input
               value={password}
