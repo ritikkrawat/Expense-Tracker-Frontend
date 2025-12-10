@@ -1,4 +1,4 @@
-export const BASE_URL = "https://expense-tracker-backend-livid.vercel.app/";
+export const BASE_URL = "process.env.REACT_APP_API_UR";
 
 // utils/apiPaths.js
 export const API_PATHS = {
