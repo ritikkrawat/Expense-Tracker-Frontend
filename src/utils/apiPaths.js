@@ -1,4 +1,4 @@
-export const BASE_URL = "process.env.REACT_APP_API_UR";
+export const BASE_URL = "process.env.REACT_APP_API_URL";
 
 // utils/apiPaths.js
 export const API_PATHS = {
