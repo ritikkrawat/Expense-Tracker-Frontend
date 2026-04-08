@@ -2,16 +2,16 @@ import React, { useContext, useState } from 'react';
 import AuthLayout from '../../components/layouts/AuthLayout';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Inputs/Input';
-import ProfilePhotoSelector from '../../components/Inputs/ProfilePhotoSelector';
+// import ProfilePhotoSelector from '../../components/Inputs/ProfilePhotoSelector';
 import axiosInstance from '../../utils/axiosinstance';
 import { API_PATHS } from '../../utils/apiPaths';
 import { validateEmail } from '../../utils/helper';
 import { UserContext } from '../../context/userContext';
-import uploadImage from '../../utils/uploadImage';
+// import uploadImage from '../../utils/uploadImage';
 import toast from 'react-hot-toast';
 
 const Signup = () => {
-  const [profilePic, setProfilePic] = useState('');
+  // const [profilePic, setProfilePic] = useState('');
   const [fullName, setFullname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -65,10 +65,10 @@ const Signup = () => {
     try {
       let profileImageUrl = '';
 
-      if (profilePic) {
-        const imageUploadRes = await uploadImage(profilePic);
-        profileImageUrl = imageUploadRes.imageUrl || '';
-      }
+      // if (profilePic) {
+      //   const imageUploadRes = await uploadImage(profilePic);
+      //   profileImageUrl = imageUploadRes.imageUrl || '';
+      // }
 
       const res = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
         fullName,
@@ -101,7 +101,7 @@ const Signup = () => {
         </p>
 
         <form onSubmit={handleSignup}>
-          <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} />
+          {/* <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} /> */}
 
           <div className="flex flex-col gap-4 md:grid md:grid-cols-2">
             <Input
