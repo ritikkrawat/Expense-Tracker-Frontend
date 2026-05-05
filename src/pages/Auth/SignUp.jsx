@@ -11,7 +11,7 @@ import uploadImage from '../../utils/uploadImage';
 import toast from 'react-hot-toast';
 
 const Signup = () => {
-  const [profilePic, setProfilePic] = useState(null);
+  const [profilePic, setProfilePic] = useState('');
   const [fullName, setFullname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
